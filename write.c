@@ -4,7 +4,7 @@
 #include<sys/types.h>
 #include<sys/stat.h>
 #include<fcntl.h>
-#include <time.h>
+#include<time.h>
 
 #define BUF_LEN 4// 268 
 #define TIMES 300 
@@ -27,8 +27,8 @@ int main(int argc,char *argv[])
 	int i;
 	
 	fd = open( dev_name , O_RDWR );
-	if(fd == -1){
-		perror("");
+	if(fd == -1)
+	{
 		printf("open failed.\n");
 		return EXIT_FAILURE;
 	}
@@ -48,7 +48,6 @@ int main(int argc,char *argv[])
 		nwrite = write(fd, (const void*)buf, BUF_LEN);
 		if (nwrite != BUF_LEN)
 		{	
-			perror("");
 			printf ("write buf to driver failed,return val:%d \n", nwrite);
 			return nwrite;
 		}
@@ -57,7 +56,7 @@ int main(int argc,char *argv[])
 	end = timeNanos();
 	
 	use = ( end - start );// / TIMES;
-    printf("each time write to kernel takes time:%3llu.%09llus\n", 
+		printf("each time write to kernel takes time:%3llu.%09llus\n", 
 		(unsigned long long)use / 1000000000, 
 		(unsigned long long)use % 1000000000);
 
